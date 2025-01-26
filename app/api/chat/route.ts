@@ -13,7 +13,7 @@ const openaiClient = new OpenAI({
 
 const index = pinecone.Index(process.env.PINECONE_INDEX_NAME!);
 
-async function getRelevantContent(query: string, numResults: number = 3) {
+async function getRelevantContent(query: string, numResults: number = 5) {
   const queryEmbedding = await openaiClient.embeddings.create({
     model: "text-embedding-ada-002",
     input: query,
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       ...messages,
     ],
     max_tokens: 16000,
-    temperature: 0.2  // Low temperature for factual, consistent responses
+    temperature: 0.1  // Low temperature for factual, consistent responses
   }).toDataStreamResponse();
 }
 
