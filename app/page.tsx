@@ -59,12 +59,13 @@ export default function ChatPage() {
         </CardContent>
         <CardFooter>
           <form onSubmit={onSubmit} className="flex w-full space-x-2">
-            <Input
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Ask SteveBizBot a business question..."
-              className="flex-grow min-h-24"
-            />
+            <textarea
+  value={input}
+  onChange={handleInputChange}
+  placeholder="Ask SteveBizBot a business question..."
+  className="flex-grow p-2 border rounded-md resize-none"
+  rows={3}
+/>
             <Button type="submit" disabled={isTyping}>Send</Button>
           </form>
         </CardFooter>
