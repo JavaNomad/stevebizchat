@@ -63,7 +63,8 @@ export default function ChatPage() {
               value={input}
               onChange={handleInputChange}
               placeholder="Ask SteveBizBot a business question..."
-              className="flex-grow whitespace-normal break-words"
+              className="flex-grow p-2 border rounded-md resize-none"
+              rows={3}
             />
             <Button type="submit" disabled={isTyping}>Send</Button>
           </form>
