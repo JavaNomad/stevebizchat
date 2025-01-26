@@ -59,11 +59,11 @@ export async function POST(req: Request) {
 3. IMPORTANT: You must include relevant URLs from the provided blog posts (up to 5 URLs)
 4. Format your response as:
    - Main answer (Important if Main answer cannot be derived from SteveBizBlog data, say so first. eg. "This query is not related to info available on SteveBizBlog but...")
-   - "Relevant posts:" section at the end with URLs
+   - "Relevant posts:" section at the end with clickable URLs
 5. Keep responses focused and under 3-4 paragraphs
 6. If you can't find specific information, acknowledge what you can see in the blog posts and indicate what additional information would be needed
 
-Remember: ALWAYS include URLs from the provided content in your response.`;
+Remember: ALWAYS include clickable URLs from the provided content in your response.`;
 
     return streamText({
       model: openai('gpt-4o-mini'),
