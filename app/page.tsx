@@ -18,7 +18,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col items-center pt-8 min-h-screen bg-white">
-      <Card className="w-full max-w-2xl p-0">
+      <Card className="w-full max-w-4xl p-0">
         <CardHeader className="p-4 pb-0">
           <CardTitle>SteveBizBlog Chatbot</CardTitle>
         </CardHeader>
@@ -63,7 +63,7 @@ export default function ChatPage() {
               value={input}
               onChange={handleInputChange}
               placeholder="Ask SteveBizBot a business question..."
-              className="flex-grow"
+              className="flex-grow min-h-12"
             />
             <Button type="submit" disabled={isTyping}>Send</Button>
           </form>
