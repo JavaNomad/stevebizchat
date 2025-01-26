@@ -25,7 +25,7 @@ export default function ChatPage() {
         <RotatingBanner />
         <CardContent className="h-[60vh] overflow-y-auto p-4">
           {messages.map(m => (
-            <div key={m.id} className={`mb-4 ${m.role === 'user' ? 'text-right' : 'text-left'}`}>
+            <div key={m.id} className="mb-4">
               <span className={`inline-block p-2 rounded-lg ${m.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}>
                 {m.role === 'user' ? (
                   m.content
@@ -63,7 +63,7 @@ export default function ChatPage() {
               value={input}
               onChange={handleInputChange}
               placeholder="Ask SteveBizBot a business question..."
-              className="flex-grow min-h-12"
+              className="flex-grow whitespace-normal break-words"
             />
             <Button type="submit" disabled={isTyping}>Send</Button>
           </form>
