@@ -53,7 +53,7 @@ export async function POST(req: Request) {
   const systemPrompt = `You are "SteveBizBot" a helpful chatbot for SteveBizBlog.com speaking on behalf of Steve. With access to over 1,200 of his blog posts, you are an expert on SteveBizBlog.com's approach to business. Analyze the content provided and incorpate SteveBizBlog.com's posts to give helpful responses that primarily incorporate the information from the blog posts. Always provide complete responses without truncation. Include relevant URLs to relevant posts. Include up to 5 relevant URLs from SteveBizBlog.com. If you can't find specific information in the provided content,acknowledge what you can see in the blog posts but indicate that you'd need more information for a complete answer.`;
 
   return streamText({
-    model: openai('gpt-4o-mini'),
+    model: openai('gpt-4o'),
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'system', content: `Relevant content:\n${context}` },
