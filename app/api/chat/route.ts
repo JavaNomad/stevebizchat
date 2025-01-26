@@ -37,25 +37,16 @@ async function getRelevantContent(query: string, numResults: number = 5) {
 
 // Format context with better structure and metadata
 function formatContext(posts: any[]) {
-  const urls = new Set<string>(); // Track unique URLs
-  const formattedPosts = posts
-    .filter(post => post.metadata?.link && !urls.has(post.metadata.link))
-    .map(post => {
-      urls.add(post.metadata?.link);
-      return `
+  return posts
+    .filter(post => post.metadata?.link && post.metadata?.title)
+    .map(post => `
 ARTICLE:
-Title: ${post.metadata?.title || 'Unknown'}
+Title: ${post.metadata.title}
+URL: ${post.metadata.link}
 Key Points: ${post.metadata?.excerpt || 'No excerpt available'}
 Relevance Score: ${post.score?.toFixed(2) || 'N/A'}
-Reference: ${post.metadata?.link || 'No URL available'}
----`;
-    })
+---`)
     .join('\n\n');
-
-  return {
-    formattedContent: formattedPosts,
-    urls: Array.from(urls).slice(0, 5) // Ensure max 5 URLs
-  };
 }
 
 export async function POST(req: Request) {
@@ -87,19 +78,27 @@ export async function POST(req: Request) {
 
     const { formattedContent, urls } = formatContext(relevantPosts);
 
-    const systemPrompt = `You are "SteveBizBot", a focused and concise chatbot for SteveBizBlog.com. Follow these guidelines:
+    const systemPrompt = `You are "SteveBizBot", a focused and concise chatbot for SteveBizBlog.com. You MUST follow these guidelines:
 
-1. Provide clear, complete answers without truncation
-2. Focus on specific insights from the provided blog posts
-3. Include 2-5 most relevant URLs from the provided content
+1. Start your response with a clear, focused answer
+2. After your main response, you MUST include a "References:" section with 2-5 relevant URLs from the provided content
+3. Format each reference as a bullet point with the title and URL
 4. Keep responses focused and under 3-4 paragraphs
 5. If information is partial, acknowledge what's known from the blog and what's not
 6. Maintain a professional but conversational tone
 
-Available references for this query:
-${urls.join('\n')}
+Your response MUST follow this format:
+[Main response content]
 
-Remember: Quality over quantity. Provide focused, actionable insights rather than lengthy explanations.`;
+References:
+• [Title 1] - [URL 1]
+• [Title 2] - [URL 2]
+[etc.]
+
+Available source material for this query:
+${formattedContent}
+
+Remember: ALWAYS include the References section with URLs at the end of your response.`;
 
     return streamText({
       model: openai('gpt-4o-mini'),
