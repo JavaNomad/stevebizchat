@@ -17,13 +17,11 @@ async function getRelevantContent(query: string, numResults: number = 5) {
     model: "text-embedding-3-small",
     input: query,
   });
-  
   const searchResults = await index.query({
     vector: queryEmbedding.data[0].embedding,
     topK: numResults,
     includeMetadata: true,
   });
-  
   return searchResults.matches;
 }
 
@@ -64,8 +62,8 @@ export async function POST(req: Request) {
       ...messages,
     ],
     stream: true,
-    temperature: 0.1,
-    max_tokens: 16000
+    max_tokens: 16000,
+    temperature: 0.1
   });
 
   const stream = OpenAIStream(response);
