@@ -4,6 +4,7 @@ import { OpenAIStream, StreamingTextResponse } from 'ai';
 
 const pinecone = new Pinecone({
   apiKey: process.env.PINECONE_API_KEY!,
+  environment: process.env.PINECONE_ENVIRONMENT!  // Add this line
 });
 
 const openaiClient = new OpenAI({
