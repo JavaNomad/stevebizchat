@@ -58,11 +58,10 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
     "zod": "^3.24.1",
-    "openai": "latest",
-    "@pinecone-database/pinecone": "latest",
-    "ai": "latest",
-    "@ai-sdk/openai": "latest",
-    "react-markdown": "latest"
+    "openai": "^4.28.0",
+    "@pinecone-database/pinecone": "^1.1.2",
+    "ai": "^2.2.36",
+    "react-markdown": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^22",
