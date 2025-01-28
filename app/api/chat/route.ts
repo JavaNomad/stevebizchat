@@ -15,7 +15,7 @@ const index = pinecone.Index(process.env.PINECONE_INDEX_NAME!);
 
 async function getRelevantContent(query: string, numResults: number = 5) {
   const queryEmbedding = await openaiClient.embeddings.create({
-    model: "text-embedding-3-small",
+    model: "text-embedding-ada-002",
     input: query,
   });
 
